@@ -78,11 +78,11 @@ A summary of the available API endpoints can be found below. For a detailed desc
 -   `/api/ml`: Machine learning predictions and analysis.
 
 ## Contributors
--Kanha Gupta
--Mihika Arora
--Rahul Shekhawat
--Pavneet Thind
--Nausheen
+• Kanha gupta
+• Mihika Arora
+• Rahul Shekhawat
+• Pavneet Thind
+• Nausheen
 
 ## Images
 <img width="1910" height="973" alt="image" src="https://github.com/user-attachments/assets/da5e23f3-9495-4dfb-8fa5-2d1834218367" />
