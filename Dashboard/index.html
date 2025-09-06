@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartStudy - Intelligent Learning Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li class="active"><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="user-details">
+                    <h4>User</h4>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle" id="menuToggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Dashboard</h1>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-view-toggle" id="mobileViewToggle" title="Mobile View">
+                    <i class='bx bx-mobile-alt'></i>
+                </button>
+                <div id="nav-auth">
+                    <!-- Auth links will be rendered here by auth.js -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="welcome-text">
+                    <h2>Welcome to Journo!</h2>
+                    <p>Journo helps you collect, analyze, and visualize trip and mobility data for smarter urban planning. Start by uploading trip logs, exploring analytics, or viewing heatmaps of travel patterns.</p>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class='bx bx-user-plus'></i></div>
+                    <div class="stat-content">
+                        <h3 id="totalUsers">--</h3>
+                        <p>Total Users Joined</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class='bx bx-file'></i></div>
+                    <div class="stat-content">
+                        <h3 id="totalTripLogs">--</h3>
+                        <p>Total Trip Logs</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class='bx bx-data'></i></div>
+                    <div class="stat-content">
+                        <h3 id="totalDataPoints">--</h3>
+                        <p>Data Points</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class='bx bx-time'></i></div>
+                    <div class="stat-content">
+                        <h3 id="analysisHours">--</h3>
+                        <p>Analysis Hours</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <div class="action-card" onclick="window.location.href='heatmap.html'">
+                        <div class="action-icon"><i class='bx bx-search'></i></div>
+                        <h4>Explore Heatmaps</h4>
+                        <p>Visualize congestion zones and popular travel routes</p>
+                    </div>
+                    <div class="action-card" onclick="window.location.href='ml-predictions.html'">
+                        <div class="action-icon"><i class='bx bx-brain'></i></div>
+                        <h4>Run ML Predictions</h4>
+                        <p>Forecast travel demand and peak times using built-in ML models</p>
+                    </div>
+                    <div class="action-card" onclick="window.location.href='reports.html'">
+                        <div class="action-icon"><i class='bx bx-file-blank'></i></div>
+                        <h4>Generate Reports</h4>
+                        <p>Download CO₂ emissions, cost, and efficiency reports</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Wix-Style Mobile Preview Container -->
+    <div class="mobile-view-container" id="mobileViewContainer">
+        <!-- Mobile Preview Controls -->
+        <div class="mobile-preview-controls">
+            <button id="mobileZoomOut" title="Zoom Out">
+                <i class="bx bx-zoom-out"></i>
+            </button>
+            <button id="mobileZoomIn" title="Zoom In">
+                <i class="bx bx-zoom-in"></i>
+            </button>
+            <button id="mobileRotate" title="Rotate">
+                <i class="bx bx-rotate-right"></i>
+            </button>
+            <button id="mobileClose" title="Close">
+                <i class="bx bx-x"></i>
+            </button>
+        </div>
+
+        <!-- Phone Frame -->
+        <div class="mobile-phone-frame" id="mobilePhoneFrame">
+            <!-- Phone Notch -->
+            <div class="mobile-phone-notch"></div>
+            
+            <!-- Phone Screen -->
+            <div class="mobile-phone-screen">
+                <div class="mobile-header">
+                    <button class="mobile-hamburger" id="mobileHamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <h1>SmartStudy</h1>
+                    <div></div> <!-- Empty div for spacing -->
+                    
+                    <!-- Mobile Dropdown Menu -->
+                    <div class="mobile-dropdown" id="mobileDropdown">
+                        <ul class="mobile-dropdown-menu">
+                            <li><a href="index.html" class="active"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+                            <li><a href="upload.html"><i class='bx bx-upload'></i>Upload Documents</a></li>
+                            <li><a href="search.html"><i class='bx bx-search'></i>Search & Explore</a></li>
+                            <li><a href="ai-assistant.html"><i class='bx bx-bot'></i>AI Assistant</a></li>
+                            <li><a href="quiz.html"><i class='bx bx-help-circle'></i>Quiz Generator</a></li>
+                            <li><a href="analytics.html"><i class='bx bx-bar-chart-alt-2'></i>Analytics</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mobile-content">
+
+            <!-- Mobile Stats -->
+            <div class="mobile-stats">
+                <div class="mobile-stat-card">
+                    <div class="stat-icon">
+                        <i class="bx bx-file"></i>
+                    </div>
+                    <h3 id="mobileTotalDocuments">0</h3>
+                    <p>Total Documents</p>
+                </div>
+                <div class="mobile-stat-card">
+                    <div class="stat-icon">
+                        <i class="bx bx-book-content"></i>
+                    </div>
+                    <h3 id="mobileTotalPages">0</h3>
+                    <p>Pages Analyzed</p>
+                </div>
+                <div class="mobile-stat-card">
+                    <div class="stat-icon">
+                        <i class="bx bx-question-mark"></i>
+                    </div>
+                    <h3 id="mobileTotalQuizzes">0</h3>
+                    <p>Quizzes Generated</p>
+                </div>
+                <div class="mobile-stat-card">
+                    <div class="stat-icon">
+                        <i class="bx bx-time"></i>
+                    </div>
+                    <h3 id="mobileStudyTime">0h</h3>
+                    <p>Study Time</p>
+                </div>
+            </div>
+
+            <!-- Mobile Actions -->
+            <div class="mobile-actions">
+                <div class="mobile-action-card" onclick="window.location.href='upload.html'">
+                    <div class="action-icon">
+                        <i class="bx bx-upload"></i>
+                    </div>
+                    <h4>Upload Documents</h4>
+                    <p>Add new study materials</p>
+                </div>
+                <div class="mobile-action-card" onclick="window.location.href='search.html'">
+                    <div class="action-icon">
+                        <i class="bx bx-search"></i>
+                    </div>
+                    <h4>Search Content</h4>
+                    <p>Find information</p>
+                </div>
+                <div class="mobile-action-card" onclick="window.location.href='ai-assistant.html'">
+                    <div class="action-icon">
+                        <i class="bx bx-bot"></i>
+                    </div>
+                    <h4>AI Assistant</h4>
+                    <p>Get AI help</p>
+                </div>
+                <div class="mobile-action-card" onclick="window.location.href='quiz.html'">
+                    <div class="action-icon">
+                        <i class="bx bx-question-mark"></i>
+                    </div>
+                    <h4>Generate Quiz</h4>
+                    <p>Create practice tests</p>
+                </div>
+            </div>
+
+            <!-- Mobile Activity -->
+            <div class="mobile-activity">
+                <h3>Recent Activity</h3>
+                <div id="mobileRecentActivity">
+                    <!-- Activity items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Mobile Progress -->
+            <div class="mobile-progress">
+                <h3>Study Progress</h3>
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <h4>Documents Read</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <span class="progress-text">3 of 4 documents</span>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-info">
+                        <h4>Quizzes Completed</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <span class="progress-text">6 of 10 quizzes</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+            <!-- Phone Home Indicator -->
+            <div class="mobile-phone-home-indicator"></div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', ()=> Auth.renderNav());</script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/mobile-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Journo</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reports.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span>Journo</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li class="active"><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle" id="menuToggle"><i class='bx bx-menu'></i></button>
+                <h1>Reports</h1>
+            </div>
+            <div class="nav-right" id="nav-auth"></div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="report-filters">
+                <div class="form-group">
+                    <label for="reportUserSelect">Select User:</label>
+                    <select id="reportUserSelect"></select>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate">
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate">
+                </div>
+            </div>
+
+            <div class="reports-grid">
+                <!-- Travel Summary Report -->
+                <div class="report-card">
+                    <div class="report-icon"><i class='bx bx-user-circle'></i></div>
+                    <h3>Travel Summary Report</h3>
+                    <p>A comprehensive overview of a user's travel patterns, including total trips, distance, and duration.</p>
+                    <button id="downloadSummary" class="btn-primary">Download PDF</button>
+                </div>
+
+                <!-- CO2 Emissions Report -->
+                <div class="report-card">
+                    <div class="report-icon"><i class='bx bx-leaf'></i></div>
+                    <h3>CO₂ Emissions Report</h3>
+                    <p>A detailed breakdown of carbon emissions by travel mode, highlighting the environmental impact.</p>
+                    <button id="downloadCO2" class="btn-primary">Download PDF</button>
+                </div>
+
+                <!-- Cost Analysis Report -->
+                <div class="report-card">
+                    <div class="report-icon"><i class='bx bx-dollar-circle'></i></div>
+                    <h3>Cost Analysis Report</h3>
+                    <p>An analysis of travel expenses by mode, providing insights into transportation spending.</p>
+                    <button id="downloadCost" class="btn-primary">Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>

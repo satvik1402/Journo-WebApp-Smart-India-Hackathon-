@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - SmartStudy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/analytics.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="mode-detection.html"><i class='bx bx-walk'></i>Travel Mode Detection</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Analytics</h1>
+            </div>
+            <div class="nav-right">
+                <div class="segmented">
+                    <button class="active" id="seg7">Last 7 Days</button>
+                    <button id="seg30">Last 30 Days</button>
+                    <button id="seg90">Last 3 Months</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Metric Tiles -->
+            <div class="grid-4" style="margin-bottom:1.25rem;">
+                <div class="metric-card">
+                    <div class="icon-badge"><i class='bx bx-file'></i></div>
+                    <div>
+                        <div class="metric-title">Total Trip Logs</div>
+                        <div class="metric-value" id="totalDocs">0</div>
+                    </div>
+                    <div class="badge success"><i class='bx bx-trending-up'></i> +12%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="icon-badge"><i class='bx bx-walk'></i></div>
+                    <div>
+                        <div class="metric-title">Trips Detected</div>
+                        <div class="metric-value" id="totalSearches">0</div>
+                    </div>
+                    <div class="badge success"><i class='bx bx-trending-up'></i> +8%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="icon-badge"><i class='bx bx-bulb'></i></div>
+                    <div>
+                        <div class="metric-title">ML Predictions</div>
+                        <div class="metric-value" id="totalQuizzes">0</div>
+                    </div>
+                    <div class="badge success"><i class='bx bx-trending-up'></i> +15%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="icon-badge"><i class='bx bx-file-find'></i></div>
+                    <div>
+                        <div class="metric-title">Reports Generated</div>
+                        <div class="metric-value" id="aiInteractions">0</div>
+                    </div>
+                    <div class="badge success"><i class='bx bx-trending-up'></i> +20%</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid-2" style="margin-bottom:1.25rem;">
+                <div class="card-elevated">
+                    <div class="flex-between" style="margin-bottom:.5rem;">
+                        <h3 class="text-muted">Mobility Activity</h3>
+                        <div class="segmented">
+                            <button class="active">Line</button>
+                            <button>Bars</button>
+                        </div>
+                    </div>
+                    <canvas id="activityChart"></canvas>
+                </div>
+                <div class="card-elevated">
+                    <div class="flex-between" style="margin-bottom:.5rem;">
+                        <h3 class="text-muted">Trip Data Types</h3>
+                        <div class="segmented">
+                            <button class="active" data-type="pie">Pie</button>
+                            <button data-type="doughnut">Doughnut</button>
+                        </div>
+                    </div>
+                    <canvas id="documentTypesChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Performance Metrics -->
+            <div class="card-elevated" style="margin-bottom:1.25rem;">
+                <div class="flex-between" style="margin-bottom:1rem;">
+                    <h3 class="text-muted">Performance Metrics</h3>
+                    <div class="segmented">
+                        <button class="active">This Month</button>
+                        <button>This Quarter</button>
+                    </div>
+                </div>
+                <div class="grid-4 metrics-container">
+                    <div class="card-subtle">
+                        <div class="flex-between"><span>Detection Accuracy</span><i class='bx bx-info-circle'></i></div>
+                        <div class="metric-value" id="searchAccuracy">85%</div>
+                        <div class="metric-title">Accurate trip detections</div>
+                    </div>
+                    <div class="card-subtle">
+                        <div class="flex-between"><span>Prediction Performance</span><i class='bx bx-info-circle'></i></div>
+                        <div class="metric-value" id="quizPerformance">78%</div>
+                        <div class="metric-title">Average prediction accuracy</div>
+                    </div>
+                    <div class="card-subtle">
+                        <div class="flex-between"><span>Report Quality</span><i class='bx bx-info-circle'></i></div>
+                        <div class="metric-value" id="aiQuality">92%</div>
+                        <div class="metric-title">User satisfaction</div>
+                    </div>
+                    <div class="card-subtle">
+                        <div class="flex-between"><span>Analysis Time</span><i class='bx bx-info-circle'></i></div>
+                        <div class="metric-value" id="studyTime">12.5h</div>
+                        <div class="metric-title">Time spent analyzing</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Section -->
+            <div class="card-elevated">
+                <div class="flex-between" style="margin-bottom:1rem;">
+                    <h3 class="text-muted">Export Analytics</h3>
+                    <span class="pill">Downloads</span>
+                </div>
+                <div class="report-download">
+                    <div class="report-card">
+                        <i class='bx bx-file-pdf'></i>
+                        <h4>PDF Report</h4>
+                        <p>Comprehensive analytics report</p>
+                        <button class="btn">Download PDF</button>
+                    </div>
+                    <div class="report-card">
+                        <i class='bx bx-spreadsheet'></i>
+                        <h4>Excel Report</h4>
+                        <p>Detailed trip data spreadsheet</p>
+                        <button class="btn">Download Excel</button>
+                    </div>
+                    <div class="report-card">
+                        <i class='bx bx-chart'></i>
+                        <h4>Chart Data</h4>
+                        <p>Raw data for visualizations</p>
+                        <button class="btn">Download JSON</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/auth.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', ()=> Auth.renderNav());</script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/mobile-view.js"></script>
+</body>
+</html>
+

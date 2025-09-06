@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heatmap Visualization - Journo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/heatmap.css">
+</head>
+<body class="main-content heatmap-page">
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li class="active"><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+    <div id="heatmapContainer">
+        <div id="heatmapLoader" class="loader-overlay">
+            <div class="loader"></div>
+        </div>
+    </div>
+    <div class="heatmap-controls card-elevated">
+        <h3 class="section-title"><i class='bx bx-filter-alt'></i> Heatmap Controls</h3>
+        <div class="form-group">
+            <label for="heatmapUserSelect">User:</label>
+            <select id="heatmapUserSelect" class="user-dropdown"></select>
+        </div>
+        <div class="form-group">
+            <label for="heatmapTypeSelect">Heatmap Type:</label>
+            <select id="heatmapTypeSelect">
+                <option value="density">Travel Density</option>
+                <option value="co2">CO₂ Emissions</option>
+            </select>
+        </div>
+    </div>
+    <script src="js/heatmap.js"></script>
+    <script src="js/maps-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Detection - Journo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/trip-detection.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li class="active"><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Trip Detection</h1>
+            </div>
+        </header>
+        <div class="dashboard-content">
+            <section class="welcome-section">
+                <div class="welcome-text">
+                    <h2>Automatic Trip Detection</h2>
+                    <p>Journo uses GPS and smart algorithms to automatically detect the start and end of your trips. This feature helps collect accurate mobility data for urban planning and analytics.</p>
+                </div>
+                <div class="user-selector">
+                    <label for="tripUserSelect" class="selector-label">
+                        <i class='bx bx-user'></i>
+                        Select User:
+                    </label>
+                    <select id="tripUserSelect" class="user-dropdown">
+                        <option value="">Loading users...</option>
+                    </select>
+                </div>
+            </section>
+            <div class="card-elevated" style="margin-bottom:1rem;">
+                <div class="flex-between" style="margin-bottom:1rem;">
+                    <div class="pill"><i class='bx bx-map'></i> Live Session</div>
+                    <div>
+                        <button id="startTripBtn" class="btn btn-primary">Start Trip</button>
+                        <button id="stopTripBtn" class="btn btn-secondary" style="display:none;">Stop Trip</button>
+                    </div>
+                </div>
+                <div id="tripMap" class="heatmap-container" style="height:360px; box-shadow:none;"></div>
+            </div>
+            <!-- Trip Details Section -->
+            <div class="trip-details-section">
+                <h3 class="section-title">Current Trip Details</h3>
+                <div class="trip-details-grid">
+                    <div class="detail-card origin-card">
+                        <div class="detail-icon">
+                            <i class='bx bx-map-pin'></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Origin</span>
+                            <span class="detail-value" id="tripOrigin">Waiting for trip...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card destination-card">
+                        <div class="detail-icon">
+                            <i class='bx bx-flag'></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Destination</span>
+                            <span class="detail-value" id="tripDestination">Waiting for trip...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card duration-card">
+                        <div class="detail-icon">
+                            <i class='bx bx-timer'></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Duration</span>
+                            <span class="detail-value" id="tripDuration">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card distance-card">
+                        <div class="detail-icon">
+                            <i class='bx bx-route'></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Distance</span>
+                            <span class="detail-value" id="tripDistance">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card mode-card">
+                        <div class="detail-icon">
+                            <i class='bx bx-walk'></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Transport Mode</span>
+                            <span class="detail-value" id="tripMode">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card speed-card">
+                        <div class="detail-icon">
+                            <i class='bx bx-tachometer'></i>
+                        </div>
+                        <div class="detail-content">
+                            <span class="detail-label">Avg Speed</span>
+                            <span class="detail-value" id="tripSpeed">--</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Trip Info -->
+                <div class="trip-summary-card">
+                    <div class="summary-header">
+                        <i class='bx bx-info-circle'></i>
+                        <span>Trip Summary</span>
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <span class="summary-label">Start Time:</span>
+                            <span class="summary-value" id="tripStartTime">--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">End Time:</span>
+                            <span class="summary-value" id="tripEndTime">--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">CO₂ Emissions:</span>
+                            <span class="summary-value" id="tripCO2">--</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Estimated Cost:</span>
+                            <span class="summary-value" id="tripCost">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            const API_BASE = 'http://localhost:5000/api';
+            let selectedUserId = null;
+            let currentTrips = [];
+            let currentTripIndex = 0;
+            
+            // Mock trip data as fallback
+            const mockTrip = {
+                origin: "Central Park",
+                destination: "Times Square",
+                duration: "18 min",
+                distance: "2.3 km",
+                mode: "Walking",
+                speed: "7.7 km/h",
+                startTime: "2:30 PM",
+                endTime: "2:48 PM",
+                co2: "0.12 kg",
+                cost: "$0.00",
+                route: [
+                    [40.785091, -73.968285],
+                    [40.7831, -73.9712],
+                    [40.7769, -73.9763],
+                    [40.758896, -73.985130]
+                ]
+            };
+            let map, directionsService, directionsRenderer;
+            function initMap() {
+                directionsService = new google.maps.DirectionsService();
+                directionsRenderer = new google.maps.DirectionsRenderer();
+                const mumbai = { lat: 19.0760, lng: 72.8777 };
+                map = new google.maps.Map(document.getElementById('tripMap'), {
+                    zoom: 12,
+                    center: mumbai,
+                    mapTypeControl: false,
+                    streetViewControl: false
+                });
+                directionsRenderer.setMap(map);
+            }
+
+            function showTripOnMap(trip) {
+                if (!trip || !trip.route || trip.route.length < 2) {
+                    console.log("No valid route data for trip, showing default map.");
+                    // Clear previous routes if any
+                    directionsRenderer.setDirections({routes: []});
+                    return;
+                }
+
+                const start = new google.maps.LatLng(trip.route[0][0], trip.route[0][1]);
+                const end = new google.maps.LatLng(trip.route[trip.route.length - 1][0], trip.route[trip.route.length - 1][1]);
+                
+                const request = {
+                    origin: start,
+                    destination: end,
+                    travelMode: 'DRIVING' // You can make this dynamic based on trip.mode
+                };
+
+                directionsService.route(request, function(result, status) {
+                    if (status == 'OK') {
+                        directionsRenderer.setDirections(result);
+                    } else {
+                        console.error('Directions request failed due to ' + status);
+                    }
+                });
+            }
+            function updateTripStats(trip) {
+                // Update values and hide empty fields
+                const fields = [
+                    {id: 'tripOrigin', value: trip.origin, default: 'Waiting for trip...'},
+                    {id: 'tripDestination', value: trip.destination, default: 'Waiting for trip...'},
+                    {id: 'tripDuration', value: trip.duration},
+                    {id: 'tripDistance', value: trip.distance},
+                    {id: 'tripMode', value: trip.mode},
+                    {id: 'tripSpeed', value: trip.speed},
+                    {id: 'tripStartTime', value: trip.startTime},
+                    {id: 'tripEndTime', value: trip.endTime},
+                    {id: 'tripCO2', value: trip.co2},
+                    {id: 'tripCost', value: trip.cost}
+                ];
+                
+                fields.forEach(field => {
+                    const element = document.getElementById(field.id);
+                    const card = element.closest('.detail-card, .summary-item');
+                    
+                    if (field.value && field.value !== '' && field.value !== '--' && field.value !== 'null' && field.value !== 'undefined') {
+                        element.textContent = field.value;
+                        if (card) card.style.display = '';
+                    } else {
+                        element.textContent = field.default || '--';
+                        if (card && !field.default) card.style.display = 'none';
+                    }
+                });
+            }
+            async function fetchUserTrips(userId) {
+                if (!userId) return [];
+                try {
+                    const response = await fetch(`${API_BASE}/trips?user_id=${userId}&limit=10`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        // The API returns {trips: [...], total: ..., limit: ..., offset: ...}
+                        const trips = data.trips || [];
+                        return trips.map(trip => ({
+                            origin: trip.start_location?.address || (trip.start_location?.lat && trip.start_location?.lng ? `${trip.start_location.lat.toFixed(4)}, ${trip.start_location.lng.toFixed(4)}` : 'Source'),
+                            destination: trip.end_location?.address || (trip.end_location?.lat && trip.end_location?.lng ? `${trip.end_location.lat.toFixed(4)}, ${trip.end_location.lng.toFixed(4)}` : 'Destination'),
+                            duration: trip.duration_minutes ? `${trip.duration_minutes} min` : null,
+                            distance: trip.distance_km ? `${trip.distance_km} km` : null,
+                            mode: trip.mode,
+                            speed: trip.distance_km && trip.duration_minutes ? `${(trip.distance_km / (trip.duration_minutes / 60)).toFixed(1)} km/h` : null,
+                            startTime: trip.start_time ? new Date(trip.start_time).toLocaleTimeString() : null,
+                            endTime: trip.end_time ? new Date(trip.end_time).toLocaleTimeString() : null,
+                            co2: trip.co2_kg ? `${trip.co2_kg} kg` : null,
+                            cost: trip.cost_usd ? `$${trip.cost_usd}` : null,
+                            route: trip.start_location?.lat && trip.start_location?.lng && trip.end_location?.lat && trip.end_location?.lng ? [
+                                [trip.start_location.lat, trip.start_location.lng],
+                                [trip.end_location.lat, trip.end_location.lng]
+                            ] : null
+                        }));
+                    }
+                } catch (error) {
+                    console.error('Failed to fetch trips:', error);
+                }
+                return [];
+            }
+            
+            async function populateUserDropdown() {
+                const select = document.getElementById('tripUserSelect');
+                select.innerHTML = '<option value="">Loading users...</option>';
+                try {
+                    const response = await fetch(`${API_BASE}/users`);
+                    const users = await response.json();
+                    select.innerHTML = '';
+                    if (users.length === 0) {
+                        select.innerHTML = '<option value="">No users found</option>';
+                        return;
+                    }
+                    users.forEach(user => {
+                        const option = document.createElement('option');
+                        option.value = user.id;
+                        option.textContent = user.username || `${user.first_name} ${user.last_name}` || user.email;
+                        select.appendChild(option);
+                    });
+                    
+                    selectedUserId = users[0].id;
+                    select.value = selectedUserId;
+                    await loadUserTrips(selectedUserId);
+                    
+                    select.addEventListener('change', async function() {
+                        selectedUserId = this.value;
+                        await loadUserTrips(selectedUserId);
+                    });
+                } catch (error) {
+                    console.error('Failed to load users:', error);
+                    select.innerHTML = '<option value="">Error loading users</option>';
+                }
+            }
+            
+            async function loadUserTrips(userId) {
+                if (!userId) return;
+                currentTrips = await fetchUserTrips(userId);
+                currentTripIndex = 0;
+
+                // Reset UI elements
+                document.getElementById('startTripBtn').style.display = 'none';
+                document.getElementById('stopTripBtn').style.display = 'none';
+
+                if (currentTrips.length > 0) {
+                    // If trips are loaded, show the first one and set the buttons for interaction
+                    showTripOnMap(currentTrips[0]);
+                    updateTripStats(currentTrips[0]);
+                    document.getElementById('startTripBtn').style.display = '';
+                } else {
+                    // If no trips, clear the map and show default stats
+                    if (directionsRenderer) {
+                        directionsRenderer.setDirections({routes: []});
+                    }
+                    updateTripStats({});
+                    document.getElementById('startTripBtn').style.display = 'block'; // Show start button even if no trips
+                }
+            }
+            
+            function nextTrip() {
+                if (currentTrips.length > 0) {
+                    currentTripIndex = (currentTripIndex + 1) % currentTrips.length;
+                    showTripOnMap(currentTrips[currentTripIndex]);
+                    updateTripStats(currentTrips[currentTripIndex]);
+                }
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                // initMap is now called by the Google Maps script callback
+                populateUserDropdown();
+                
+                document.getElementById('startTripBtn').onclick = function() {
+                    this.style.display = 'none';
+                    document.getElementById('stopTripBtn').style.display = '';
+                    showCurrentTrip();
+                };
+                
+                document.getElementById('stopTripBtn').onclick = function() {
+                    this.style.display = 'none';
+                    document.getElementById('startTripBtn').style.display = '';
+                    if (directionsRenderer) {
+                        directionsRenderer.setDirections({routes: []}); // Clear the route from the map
+                    }
+                    updateTripStats({});
+                    // Show next trip after a delay
+                    setTimeout(() => {
+                        nextTrip();
+                        document.getElementById('startTripBtn').style.display = '';
+                    }, 1000);
+                };
+            });
+            </script>
+            <script src="js/maps-loader.js"></script>
+        </div>
+    </main>
+</body>
+</html>

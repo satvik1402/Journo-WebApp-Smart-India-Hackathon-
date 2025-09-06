@@ -1,0 +1,125 @@
+/* Context Awareness Page Specific Styles */
+
+.context-page-layout {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 1.5rem;
+    height: calc(100vh - 100px); /* Full height minus header */
+}
+
+.map-container-context {
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#contextMap {
+    width: 100%;
+    height: 100%;
+}
+
+.controls-container-context {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.place-finder, .user-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.user-selector .selector-label {
+    font-weight: 600;
+    color: #475569;
+}
+
+.place-finder label {
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.25rem;
+}
+
+#placeTypeSelect, .user-dropdown {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #334155;
+}
+
+#findPlacesBtn {
+    margin-top: 0.5rem;
+    width: 100%; /* Ensure it takes full width */
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.results-card {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.places-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+
+.place-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.place-item:last-child {
+    border-bottom: none;
+}
+
+.place-item {
+    background-color: #fff; /* Ensure default is white */
+}
+
+.place-item:hover {
+    background-color: #f8fafc;
+}
+
+.place-item.active {
+    background-color: #f0f2ff; /* A subtle active state */
+}
+
+.place-item h4 {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+}
+
+.place-item p {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.place-item .details {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 0.5rem;
+}

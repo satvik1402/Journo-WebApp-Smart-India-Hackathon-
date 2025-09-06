@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>Smart Travel PWA</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Smart Travel</h1>
+    <div class="env">
+      <label>API
+        <input id="apiBase" placeholder="http://localhost:5001/api" />
+      </label>
+      <button id="saveApi">Save</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Trip Controls</h2>
+      <div class="row">
+        <label>User ID <input id="userId" type="number" placeholder="1" /></label>
+        <label>Mode
+          <select id="mode">
+            <option value="walking">Walking</option>
+            <option value="cycling">Cycling</option>
+            <option value="bus">Bus</option>
+            <option value="car">Car</option>
+            <option value="train">Train</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <button id="startTrip">Start Trip</button>
+        <button id="stopTrip" class="danger">Stop Trip</button>
+      </div>
+      <div class="status" id="status">Idle</div>
+    </section>
+
+    <section class="card">
+      <h2>Live Location</h2>
+      <div class="row small">
+        <div>Lat: <span id="lat">-</span></div>
+        <div>Lng: <span id="lng">-</span></div>
+        <div>Accuracy: <span id="acc">-</span> m</div>
+        <div>Speed: <span id="spd">-</span> m/s</div>
+      </div>
+      <div class="row">
+        <div>Buffered Points: <span id="bufferCount">0</span></div>
+        <button id="flushNow">Upload Now</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Manual Mode Override</h2>
+      <div class="row">
+        <button data-mode="walking" class="chip">Walking</button>
+        <button data-mode="cycling" class="chip">Cycling</button>
+        <button data-mode="bus" class="chip">Bus</button>
+        <button data-mode="car" class="chip">Car</button>
+        <button data-mode="train" class="chip">Train</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Logs</h2>
+      <pre id="log" class="log"></pre>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/mobile-app/service-worker.js');
+    }
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel Tracker</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2196F3">
+    <meta name="description" content="Automatic trip detection and travel analytics">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Maps API -->
+    <script src="js/maps-loader.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <h1> Smart Travel Tracker</h1>
+            <div class="user-info">
+                <span id="user-name">Guest User</span>
+                <button id="login-btn" class="btn btn-secondary">Login</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Trip Status Card -->
+            <div class="trip-status-card">
+                <div class="status-indicator" id="status-indicator">
+                    <div class="status-circle"></div>
+                    <span id="status-text">Ready to Start Trip</span>
+                </div>
+                
+                <div class="trip-controls">
+                    <button id="start-trip-btn" class="btn btn-primary btn-large">
+                        🚀 Start Trip
+                    </button>
+                    <button id="stop-trip-btn" class="btn btn-danger btn-large" style="display: none;">
+                        🛑 Stop Trip
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Trip Info -->
+            <div class="trip-info-card" id="trip-info-card" style="display: none;">
+                <h3>Current Trip</h3>
+                <div class="trip-details">
+                    <div class="detail-item">
+                        <span class="label">Duration:</span>
+                        <span id="trip-duration">00:00:00</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Distance:</span>
+                        <span id="trip-distance">0.0 km</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Mode:</span>
+                        <span id="trip-mode">Detecting...</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Speed:</span>
+                        <span id="trip-speed">0 km/h</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Info -->
+            <div class="location-card">
+                <h3>📍 Location</h3>
+                <div class="location-details">
+                    <div class="detail-item">
+                        <span class="label">Current:</span>
+                        <span id="current-location">Getting location...</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Accuracy:</span>
+                        <span id="location-accuracy">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manual Trip Entry -->
+            <div class="manual-trip-card">
+                <h3>📝 Manual Trip Entry</h3>
+                <form id="manual-trip-form">
+                    <div class="form-group">
+                        <label for="trip-mode-select">Travel Mode:</label>
+                        <select id="trip-mode-select" required>
+                            <option value="">Select Mode</option>
+                            <option value="walking">🚶 Walking</option>
+                            <option value="cycling">🚴 Cycling</option>
+                            <option value="bus">🚌 Bus</option>
+                            <option value="car">🚗 Car</option>
+                            <option value="train">🚆 Train</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="start-address">Start Address:</label>
+                        <input type="text" id="start-address" placeholder="Enter start address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="end-address">End Address:</label>
+                        <input type="text" id="end-address" placeholder="Enter end address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="trip-notes">Notes (Optional):</label>
+                        <textarea id="trip-notes" placeholder="Add any notes about this trip"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Save Trip</button>
+                </form>
+            </div>
+
+            <!-- Recent Trips -->
+            <div class="recent-trips-card">
+                <h3>📊 Recent Trips</h3>
+                <div id="recent-trips-list">
+                    <p class="no-data">No trips recorded yet</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Smart Travel Tracker - Hackathon Project</p>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-username">Username or Email:</label>
+                    <input type="text" id="login-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/trip-detection.js"></script>
+    <script src="js/location-service.js"></script>
+    <script src="js/api-service.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

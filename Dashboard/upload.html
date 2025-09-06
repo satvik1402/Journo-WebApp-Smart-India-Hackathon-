@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Documents - SmartStudy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/upload.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="mode-detection.html"><i class='bx bx-walk'></i>Travel Mode Detection</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="user-details">
+                    <h4>User</h4>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="bx bx-menu"></i>
+                </button>
+                <h1>Upload Documents</h1>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-view-toggle" id="mobileViewToggle" title="Toggle Mobile View">
+                    <i class="bx bx-mobile"></i>
+                </button>
+                <div class="search-box">
+                    <i class="bx bx-search"></i>
+                    <input type="text" placeholder="Quick search...">
+                </div>
+                <div class="notifications">
+                    <i class="bx bx-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                <div class="user-menu">
+                    <img src="https://via.placeholder.com/40" alt="User" class="user-img">
+                </div>
+            </div>
+        </header>
+
+        <!-- Upload Content -->
+        <div class="upload-content">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-header">
+                    <h2>Upload Your Trip Data</h2>
+                    <p>Drag and drop your trip logs, mobility datasets, or analytics files here. Supported formats: CSV, JSON, XLSX. This helps power urban mobility planning and analytics in Journo.</p>
+                </div>
+
+                <!-- Drag & Drop Zone -->
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-zone-content">
+                        <div class="upload-icon">
+                            <i class="bx bx-cloud-upload"></i>
+                        </div>
+                        <h3>Drop files here or click to upload</h3>
+                        <p>Supports: CSV, JSON, XLSX (Max 100MB)</p>
+                        <button class="btn btn-secondary" id="browseBtn">
+                            <i class="bx bx-folder-open"></i>
+                            Choose Files
+                        </button>
+                    </div>
+                    <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.zip" style="display: none;">
+                </div>
+
+                <!-- Upload Progress -->
+                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                    <div class="progress-header">
+                        <h3>Uploading Files</h3>
+                        <button class="btn btn-secondary" onclick="cancelUpload()">
+                            <i class="bx bx-x"></i>
+                            Cancel
+                        </button>
+                    </div>
+                    <div class="progress-list" id="progressList">
+                        <!-- Progress items will be added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Uploads -->
+            <div class="recent-uploads">
+                <div class="section-header">
+                    <h3>Recent Uploads</h3>
+                    <button class="btn btn-secondary" onclick="refreshUploads()">
+                        <i class="bx bx-refresh"></i>
+                        Refresh
+                    </button>
+                </div>
+                <div class="uploads-list" id="uploadsList">
+                    <!-- Upload items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Upload Tips -->
+            <div class="upload-tips">
+                <h3>Upload Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bx bx-file-pdf"></i>
+                        </div>
+                        <h4>Trip Data Files</h4>
+                        <p>Upload GPS logs, trip records, or mobility datasets for analytics and visualization.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bx bx-archive"></i>
+                        </div>
+                        <h4>Batch Uploads</h4>
+                        <p>Upload multiple files at once for bulk analytics. We support zipped CSV/JSON files.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bx bx-time"></i>
+                        </div>
+                        <h4>Processing Time</h4>
+                        <p>Large datasets may take a few minutes to process. You'll receive a notification when complete.</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bx bx-search"></i>
+                        </div>
+                        <h4>Analytics Ready</h4>
+                        <p>Once uploaded, your trip data becomes available for heatmaps, insights, and ML predictions in Journo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/upload.js"></script>
+    <script src="js/mobile-view.js"></script>
+</body>
+</html>
+

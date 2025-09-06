@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search & Explore - SmartStudy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="mode-detection.html"><i class='bx bx-walk'></i>Travel Mode Detection</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Search Mobility Data</h1>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-view-toggle" id="mobileViewToggle" title="Toggle Mobile View">
+                    <i class="bx bx-mobile"></i>
+                </button>
+                <div id="nav-auth"></div>
+            </div>
+        </header>
+
+        <!-- Search Content -->
+        <div class="search-container">
+            <!-- Search Bar -->
+            <div class="search-section">
+                <div class="search-bar">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="searchInput" placeholder="Search your trip logs or mobility data...">
+                    <button id="searchBtn" class="search-btn">
+                        <i class='bx bx-search'></i>
+                        Search
+                    </button>
+                </div>
+                
+                <!-- Advanced Filters -->
+                <div class="advanced-filters">
+                    <div class="filter-group">
+                        <label>Data Type:</label>
+                        <select id="fileTypeFilter">
+                            <option value="">All Types</option>
+                            <option value="csv">CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="xlsx">XLSX</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Search Mode:</label>
+                        <select id="searchMode">
+                            <option value="find_trips">Find trips (content)</option>
+                            <option value="find_files">Find files (by name)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Date Range:</label>
+                        <select id="dateFilter">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" id="clearFilters" class="btn btn-secondary" onclick="clearFilters()">
+                        <i class='bx bx-reset'></i>
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="results-section">
+                <div class="results-header">
+                    <h2>Search Results</h2>
+                    <div class="results-info">
+                        <span id="resultsCount">0 results found</span>
+                        <div class="sort-options">
+                            <label>Sort by:</label>
+                            <select id="sortBy">
+                                <option value="relevance">Relevance</option>
+                                <option value="date">Date</option>
+                                <option value="filename">Filename</option>
+                                <option value="size">File Size</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-container" id="resultsContainer">
+                    <!-- Results will be populated here -->
+                    <div class="no-results">
+                        <i class='bx bx-search-alt'></i>
+                        <h3>Start searching to explore your trip and mobility data</h3>
+                        <p>Use the search bar above to find specific trips, patterns, or datasets</p>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button class="page-btn" id="prevPage">
+                        <i class='bx bx-chevron-left'></i>
+                        Previous
+                    </button>
+                    <div class="page-numbers" id="pageNumbers"></div>
+                    <button class="page-btn" id="nextPage">
+                        Next
+                        <i class='bx bx-chevron-right'></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search Suggestions -->
+            <div class="suggestions-section">
+                <h3>Popular Searches</h3>
+                <div class="suggestion-tags">
+                    <span class="suggestion-tag" data-query="bus">bus</span>
+                    <span class="suggestion-tag" data-query="congestion">congestion</span>
+                    <span class="suggestion-tag" data-query="CO2">CO2</span>
+                    <span class="suggestion-tag" data-query="heatmap">heatmap</span>
+                    <span class="suggestion-tag" data-query="peak hours">peak hours</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', ()=> Auth.renderNav());</script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/mobile-view.js"></script>
+</body>
+</html>
+

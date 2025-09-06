@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - SmartStudy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ai-assistant.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="mode-detection.html"><i class='bx bx-walk'></i>Travel Mode Detection</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Mobility Assistant (Coming Soon)</h1>
+                <p>This feature will provide AI-powered insights and Q&A for your trip and mobility data. Stay tuned!</p>
+            </div>
+            <div class="nav-right">
+                <button class="mobile-view-toggle" id="mobileViewToggle" title="Toggle Mobile View">
+                    <i class="bx bx-mobile"></i>
+                </button>
+                <div id="nav-auth"></div>
+            </div>
+        </header>
+
+        <!-- AI Assistant Content -->
+        <div class="ai-container">
+            <!-- Feature Cards -->
+            <div class="feature-cards">
+                <div class="feature-card" data-feature="chat">
+                    <div class="card-icon">
+                        <i class='bx bx-message-rounded-dots'></i>
+                    </div>
+                    <h3>Chat about Mobility Data</h3>
+                    <p>Ask questions about your trip and mobility data, and get insights for urban planning.</p>
+                </div>
+                
+                
+                <div class="feature-card" data-feature="summarize">
+                    <div class="card-icon">
+                        <i class='bx bx-text'></i>
+                    </div>
+                    <h3>Summarize Travel Patterns</h3>
+                    <p>Get summaries of travel modes, congestion, and trip patterns from your uploaded data.</p>
+                </div>
+                
+                <div class="feature-card" data-feature="concepts">
+                    <div class="card-icon">
+                        <i class='bx bx-bulb'></i>
+                    </div>
+                    <h3>Key Mobility Insights</h3>
+                    <p>Extract and understand the main trends and patterns in your mobility data.</p>
+                </div>
+                
+                <div class="feature-card" data-feature="flashcards">
+                    <div class="card-icon">
+                        <i class='bx bx-card'></i>
+                    </div>
+                    <h3>Generate Reports</h3>
+                    <p>Create interactive reports to help you analyze and present mobility data.</p>
+                </div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="chat-interface" id="chatInterface" style="display: none;">
+                <div class="chat-header">
+                    <button class="back-btn" id="backBtn">
+                        <i class='bx bx-arrow-back'></i>
+                        Back to Features
+                    </button>
+                    <h2 id="chatTitle">AI Chat</h2>
+                    <div class="chat-actions">
+                        <button class="action-btn" id="clearChat">
+                            <i class='bx bx-trash'></i>
+                            Clear Chat
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-message">
+                        <div class="ai-avatar">
+                            <i class='bx bx-bot'></i>
+                        </div>
+                        <div class="message-content">
+                            <h3>Hello! I'm your Mobility Data Assistant</h3>
+                            <p>I can help you with:</p>
+                            <ul>
+                                <li>Answering questions about your trip and mobility data</li>
+                                <li>Providing summaries of travel patterns and congestion</li>
+                                <li>Extracting key mobility insights</li>
+                                <li>Generating reports for urban planning</li>
+                            </ul>
+                            <p>What would you like to know?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea id="chatInput" placeholder="Ask me anything about your study materials..." rows="1"></textarea>
+                        <button id="sendBtn" class="send-btn">
+                            <i class='bx bx-send'></i>
+                        </button>
+                    </div>
+                    <div class="input-actions">
+                        <button class="quick-action" data-action="summarize">📝 Summarize</button>
+                        <button class="quick-action" data-action="explain">💡 Explain</button>
+                        <button class="quick-action" data-action="examples">📋 Examples</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summarize Interface -->
+            <div class="summarize-interface" id="summarizeInterface" style="display: none;">
+                <div class="interface-header">
+                    <button class="back-btn" id="summarizeBackBtn">
+                        <i class='bx bx-arrow-back'></i>
+                        Back to Features
+                    </button>
+                    <h2>Topic Summarization</h2>
+                </div>
+
+                <div class="summarize-form">
+                    <div class="form-group">
+                        <label for="summarizeDocument">Select Document:</label>
+                        <select id="summarizeDocument">
+                            <option value="">-- Select a document --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="summarizeTopic">Topic to Summarize:</label>
+                        <input type="text" id="summarizeTopic" placeholder="e.g., Database Normalization, SQL Joins, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="summarizeLength">Summary Length:</label>
+                        <select id="summarizeLength">
+                            <option value="brief">Brief (2-3 paragraphs)</option>
+                            <option value="detailed" selected>Detailed (4-6 paragraphs)</option>
+                            <option value="comprehensive">Comprehensive (Full coverage)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="summarizeFuzzy" checked>
+                            Allow fuzzy matching (tolerate typos)
+                        </label>
+                    </div>
+                    
+                    <button id="generateSummary" class="primary-btn">
+                        <i class='bx bx-text'></i>
+                        Generate Summary
+                    </button>
+                </div>
+
+                <div class="summary-result" id="summaryResult" style="display: none;">
+                    <h3>Summary</h3>
+                    <div class="summary-content" id="summaryContent"></div>
+                    <div class="summary-sources" id="summarySources"></div>
+                </div>
+            </div>
+
+            <!-- Concepts Interface -->
+            <div class="concepts-interface" id="conceptsInterface" style="display: none;">
+                <div class="interface-header">
+                    <button class="back-btn" id="conceptsBackBtn">
+                        <i class='bx bx-arrow-back'></i>
+                        Back to Features
+                    </button>
+                    <h2>Key Concepts Extraction</h2>
+                </div>
+
+                <div class="concepts-form">
+                    <div class="form-group">
+                        <label for="conceptsDocument">Select Document (Optional):</label>
+                        <select id="conceptsDocument">
+                            <option value="">All Documents</option>
+                        </select>
+                    </div>
+                    
+                    <button id="extractConcepts" class="primary-btn">
+                        <i class='bx bx-bulb'></i>
+                        Extract Key Concepts
+                    </button>
+                </div>
+
+                <div class="concepts-result" id="conceptsResult" style="display: none;">
+                    <h3>Key Concepts</h3>
+                    <div class="concepts-grid" id="conceptsGrid"></div>
+                </div>
+            </div>
+
+            <!-- Flashcards Interface -->
+            <div class="flashcards-interface" id="flashcardsInterface" style="display: none;">
+                <div class="interface-header">
+                    <button class="back-btn" id="flashcardsBackBtn">
+                        <i class='bx bx-arrow-back'></i>
+                        Back to Features
+                    </button>
+                    <h2>Flashcard Generator</h2>
+                </div>
+
+                <div class="flashcards-form">
+                    <div class="form-group">
+                        <label for="flashcardsDocument">Select Document:</label>
+                        <select id="flashcardsDocument">
+                            <option value="">All Documents</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flashcardTopic">Topic for Flashcards:</label>
+                        <input type="text" id="flashcardTopic" placeholder="e.g., Database Terms, SQL Commands, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="flashcardCount">Number of Cards:</label>
+                        <select id="flashcardCount">
+                            <option value="5">5 Cards</option>
+                            <option value="10" selected>10 Cards</option>
+                            <option value="15">15 Cards</option>
+                            <option value="20">20 Cards</option>
+                        </select>
+                    </div>
+                    
+                    <button id="generateFlashcards" class="primary-btn">
+                        <i class='bx bx-card'></i>
+                        Generate Flashcards
+                    </button>
+                </div>
+
+                <div class="flashcards-result" id="flashcardsResult" style="display: none;">
+                    <h3>Your Flashcards</h3>
+                    <div class="flashcards-container" id="flashcardsContainer"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', ()=> Auth.renderNav());</script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/mobile-view.js"></script>
+</body>
+</html>
+

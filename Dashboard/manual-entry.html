@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Trip Entry - Journo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/manual-entry.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li class="active"><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Manual Trip Entry</h1>
+            </div>
+        </header>
+        <div class="dashboard-content manual-entry-layout">
+            <div class="manual-entry-form card-elevated">
+                <h3 class="section-title"><i class='bx bx-edit-alt'></i> Log a New Trip</h3>
+                <form id="manualTripForm">
+                    <div class="user-selector" style="margin-bottom: 1.5rem;">
+                        <label for="manualUserSelect" class="selector-label"><i class='bx bx-user'></i> User:</label>
+                        <select id="manualUserSelect" class="user-dropdown" required></select>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="start_address">Origin</label>
+                            <input type="text" id="start_address" placeholder="e.g., Central Park, NYC" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end_address">Destination</label>
+                            <input type="text" id="end_address" placeholder="e.g., Times Square, NYC" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="start_time">Start Time</label>
+                            <input type="datetime-local" id="start_time" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end_time">End Time</label>
+                            <input type="datetime-local" id="end_time">
+                        </div>
+                        <div class="form-group">
+                            <label for="mode">Mode of Transport</label>
+                            <select id="mode" required>
+                                <option value="walking">Walking</option>
+                                <option value="cycling">Cycling</option>
+                                <option value="bus">Bus</option>
+                                <option value="car">Car</option>
+                                <option value="train">Train</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="distance_km">Distance (km)</label>
+                            <input type="number" id="distance_km" step="0.1" placeholder="e.g., 5.2">
+                        </div>
+                        <div class="form-group">
+                            <label for="duration_minutes">Duration (min)</label>
+                            <input type="number" id="duration_minutes" placeholder="e.g., 30">
+                        </div>
+                        <div class="form-group">
+                            <label for="cost_usd">Cost (USD)</label>
+                            <input type="number" id="cost_usd" step="0.01" placeholder="e.g., 2.75">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" rows="3" placeholder="e.g., Scenic route through the park"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-solid-primary">Add Trip</button>
+                </form>
+            </div>
+            <div class="manual-trip-list card-elevated">
+                <h3 class="section-title"><i class='bx bx-list-ul'></i> Recently Added Trips</h3>
+                <div id="tripListContainer"></div>
+            </div>
+        </div>
+    </main>
+    <script src="js/manual-entry.js"></script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: sih_postgres
+    environment:
+      POSTGRES_USER: sih
+      POSTGRES_PASSWORD: sihpassword
+      POSTGRES_DB: sih
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sih_backend
+    environment:
+      PORT: 5000
+      SECRET_KEY: dev-secret-key
+      DATABASE_URL: postgresql+psycopg2://sih:sihpassword@db:5432/sih
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:-}
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+
+

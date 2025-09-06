@@ -1,0 +1,81 @@
+/* Manual Entry Page Specific Styles */
+
+.manual-entry-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.manual-entry-form .card-elevated, .manual-trip-list .card-elevated {
+    padding: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #334155;
+}
+
+.manual-trip-list #tripListContainer {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.trip-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+}
+
+.trip-item:last-child {
+    border-bottom: none;
+}
+
+.trip-details h4 {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+}
+
+.trip-details p {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.trip-actions button {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 1.2rem;
+}

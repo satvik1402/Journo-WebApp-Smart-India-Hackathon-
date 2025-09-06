@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Predictions - Journo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ml-predictions.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li class="active"><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>ML Predictions</h1>
+            </div>
+        </header>
+        <div class="dashboard-content">
+            <section class="welcome-section">
+                <div class="welcome-text">
+                    <h2>Mobility Predictions & Hotspots</h2>
+                    <p>Analyze and predict travel patterns using historical data. Explore peak travel times, popular destinations, and operational trends.</p>
+                </div>
+                <div class="user-selector">
+                    <label for="mlUserSelect" class="selector-label"><i class='bx bx-user'></i> Select User:</label>
+                    <select id="mlUserSelect" class="user-dropdown">
+                        <option value="">Loading users...</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Main Grid -->
+            <div class="ml-grid">
+                <!-- Peak Hours -->
+                <div class="chart-card" id="peak-hours-card">
+                    <div class="card-header">
+                        <i class='bx bx-time-five'></i>
+                        <h3>Peak Travel Hours (Overall)</h3>
+                    </div>
+                    <div class="loading-indicator">Loading...</div><canvas id="peakHoursChart"></canvas>
+                </div>
+
+                <!-- Peak Hours by Mode -->
+                <div class="chart-card" id="peak-hours-mode-card">
+                    <div class="card-header">
+                        <i class='bx bx-car'></i>
+                        <h3>Peak Hours by Travel Mode</h3>
+                    </div>
+                    <div class="loading-indicator">Loading...</div><canvas id="peakHoursModeChart"></canvas>
+                </div>
+
+                <!-- Heatmap -->
+                <div class="chart-card wide-card" id="heatmap-card">
+                    <div class="card-header">
+                        <i class='bx bxs-grid'></i>
+                        <h3>Travel Heatmap (Hour of Day vs. Day of Week)</h3>
+                    </div>
+                    <div class="loading-indicator">Loading...</div><canvas id="travelHeatmap"></canvas>
+                </div>
+
+                <!-- Hotspots Map -->
+                <div class="chart-card wide-card" id="hotspots-map-card">
+                    <div class="card-header">
+                        <i class='bx bx-map-alt'></i>
+                        <h3>All-Time Hotspot Leaderboard</h3>
+                    </div>
+                    <div class="loading-indicator">Loading...</div><div id="hotspotsMap"></div>
+                </div>
+
+                <!-- Hotspots Table -->
+                <div class="table-card" id="hotspots-table-card">
+                    <div class="card-header">
+                        <i class='bx bx-list-ul'></i>
+                        <h3>Hotspot Details</h3>
+                    </div>
+                    <div class="table-container incoming-feature" style="display: flex; justify-content: center; align-items: center; height: 120px; color: #a0aec0; font-size: 1.2rem; font-weight: 500; background-color: #f7fafc; border-radius: 8px;">
+                        Coming Soon
+                    </div>
+                </div>
+
+                <!-- Daily Hotspots -->
+                <div class="table-card" id="daily-hotspots-card">
+                    <div class="card-header">
+                        <i class='bx bx-calendar-star'></i>
+                        <h3>Top 3 Daily Hotspots</h3>
+                    </div>
+                    <div class="table-container incoming-feature" style="display: flex; justify-content: center; align-items: center; height: 120px; color: #a0aec0; font-size: 1.2rem; font-weight: 500; background-color: #f7fafc; border-radius: 8px;">
+                        Coming Soon
+                    </div>
+                </div>
+
+                <!-- Operational Trends -->
+                <div class="chart-card wide-card" id="trends-card">
+                    <div class="card-header">
+                        <i class='bx bx-line-chart'></i>
+                        <h3>Operational Trends (Trips per Day by Mode)</h3>
+                    </div>
+                    <div class="loading-indicator">Loading...</div><canvas id="trendsChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="js/ml-predictions.js"></script>
+    </main>
+</body>
+</html>

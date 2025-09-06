@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Insights - Journo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class='bx bx-globe'></i>
+                <span style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.7rem; letter-spacing: 1px; color: #667eea;">Journo</span>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class='bx bx-home-alt'></i>Dashboard</a></li>
+            <li><a href="trip-detection.html"><i class='bx bx-map'></i>Trip Detection</a></li>
+            <li><a href="manual-entry.html"><i class='bx bx-edit'></i>Manual Trip Entry</a></li>
+            <li><a href="context-awareness.html"><i class='bx bx-compass'></i>Context Awareness</a></li>
+            <li><a href="heatmap.html"><i class='bx bx-heat-map'></i>Heatmap Visualization</a></li>
+            <li class="active"><a href="data-insights.html"><i class='bx bx-bar-chart'></i>Data Insights</a></li>
+            <li><a href="ml-predictions.html"><i class='bx bx-bulb'></i>ML Predictions</a></li>
+            <li><a href="reports.html"><i class='bx bx-file'></i>Reports</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="sidebar-toggle">
+                    <i class='bx bx-menu'></i>
+                </button>
+                <h1>Data Insights</h1>
+            </div>
+        </header>
+        <div class="dashboard-content">
+            <section class="welcome-section">
+                <div class="welcome-text">
+                    <h2>Mobility Data Insights</h2>
+                    <p>Journo provides deep insights into travel patterns, mode distribution, and trip frequency. Use these analytics to inform policy, optimize routes, and improve urban mobility.</p>
+                </div>
+            </section>
+            <div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:2rem;">
+                <label>Select User:
+                    <select id="insightsUserSelect">
+                        <option value="">Loading users...</option>
+                    </select>
+                </label>
+            </div>
+            <div class="insights-grid">
+                <div class="feature-highlight" style="flex-direction:column;align-items:stretch;">
+                    <h3><i class='bx bx-timer'></i> Travel Time & Duration</h3>
+                    <canvas id="durationChart" height="120"></canvas>
+                    <div class="chart-loading" id="durationChartLoading">Loading...</div>
+                </div>
+                <div class="feature-highlight" style="flex-direction:column;align-items:stretch;">
+                    <h3><i class='bx bx-map-pin'></i> Top Destinations</h3>
+                    <div class="incoming-feature" style="display: flex; justify-content: center; align-items: center; height: 120px; color: #a0aec0; font-size: 1.2rem; font-weight: 500; background-color: #f7fafc; border-radius: 8px;">
+                        Coming Soon
+                    </div>
+                    <canvas id="destPieChart" height="120" style="display: none;"></canvas>
+                    <div class="chart-loading" id="destPieChartLoading" style="display: none;">Loading...</div>
+                </div>
+                <div class="feature-highlight" style="flex-direction:column;align-items:stretch;">
+                    <h3><i class='bx bx-leaf'></i> CO₂ Emissions by Mode</h3>
+                    <canvas id="co2BarChart" height="120"></canvas>
+                    <div class="chart-loading" id="co2BarChartLoading">Loading...</div>
+                </div>
+                <div class="feature-highlight" style="flex-direction:column;align-items:stretch;">
+                    <h3><i class='bx bx-rupee'></i> Travel Expenses by Site</h3>
+                    <canvas id="expensePieChart" height="120"></canvas>
+                    <div class="chart-loading" id="expensePieChartLoading">Loading...</div>
+                </div>
+                <div class="feature-highlight" style="flex-direction:column;align-items:stretch;">
+                    <h3><i class='bx bx-bus'></i> Mode of Travel</h3>
+                    <canvas id="modeBarChart" height="120"></canvas>
+                    <div class="chart-loading" id="modeBarChartLoading">Loading...</div>
+                </div>
+                <div class="feature-highlight" style="flex-direction:column;align-items:stretch;">
+                    <h3><i class='bx bx-analyse'></i> Further Metrics</h3>
+                    <canvas id="metricsChart" height="120"></canvas>
+                    <div class="chart-loading" id="metricsChartLoading">Loading...</div>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="js/data-insights.js"></script>
+        </div>
+    </main>
+</body>
+</html>

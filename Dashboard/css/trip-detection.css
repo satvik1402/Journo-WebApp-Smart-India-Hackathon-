@@ -1,0 +1,372 @@
+/* Trip Detection Page Specific Styles */
+
+/* User Selector Styles */
+.user-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.selector-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.selector-label i {
+    font-size: 1.2rem;
+    color: #667eea;
+}
+
+.user-dropdown {
+    min-width: 200px;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    color: #1e293b;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.user-dropdown:hover {
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.user-dropdown:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: rgba(255, 255, 255, 1);
+}
+
+.user-dropdown option {
+    padding: 0.5rem;
+    background: white;
+    color: #1e293b;
+}
+
+/* Custom Map Markers */
+.custom-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+}
+
+.origin-marker {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.destination-marker {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Responsive adjustments for user selector */
+@media (max-width: 768px) {
+    .user-selector {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .user-dropdown {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+.trip-details-section {
+    margin-top: 2rem;
+    padding: 0;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 2px;
+}
+
+.trip-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.detail-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.detail-card.origin-card::before {
+    background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.detail-card.destination-card::before {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+.detail-card.duration-card::before {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.detail-card.distance-card::before {
+    background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+}
+
+.detail-card.mode-card::before {
+    background: linear-gradient(90deg, #06b6d4, #0891b2);
+}
+
+.detail-card.speed-card::before {
+    background: linear-gradient(90deg, #ec4899, #db2777);
+}
+
+.detail-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-size: 1.5rem;
+}
+
+.origin-card .detail-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.destination-card .detail-icon {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.duration-card .detail-icon {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.distance-card .detail-icon {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.mode-card .detail-icon {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+.speed-card .detail-icon {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.2;
+}
+
+.trip-summary-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.trip-summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.summary-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.summary-header i {
+    font-size: 1.5rem;
+    color: #667eea;
+}
+
+.summary-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+    min-height: 60px;
+}
+
+.summary-label {
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+.summary-value {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 0.95rem;
+}
+
+/* Hide elements with empty or null values */
+.detail-card:has(.detail-value:empty),
+.detail-card:has(.detail-value[data-empty="true"]),
+.summary-item:has(.summary-value:empty),
+.summary-item:has(.summary-value[data-empty="true"]) {
+    display: none;
+}
+
+/* Animation for value updates */
+.detail-value,
+.summary-value {
+    transition: all 0.3s ease;
+}
+
+.detail-value.updating,
+.summary-value.updating {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .trip-details-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .detail-card {
+        padding: 1.25rem;
+    }
+    
+    .trip-summary-card {
+        padding: 1.5rem;
+    }
+    
+    .summary-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .user-selector {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .user-dropdown {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+/* Loading states */
+.detail-value:empty::after,
+.summary-value:empty::after {
+    content: '--';
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* Status indicators */
+.detail-card.active {
+    border: 2px solid #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.detail-card.inactive .detail-value {
+    color: #94a3b8;
+}
