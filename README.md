@@ -1,4 +1,4 @@
-# Journo - Smart Mobility Analytics Platform
+# Journo - Smart Travel Analytics Platform
 
 Journo is a comprehensive smart mobility analytics platform designed to collect, analyze, and visualize travel and mobility data. The application provides insights into travel patterns, environmental impact, and cost analysis for smarter urban planning and personal mobility management.
 
